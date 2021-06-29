@@ -44,6 +44,7 @@ import javax.annotation.Nullable;
 import javax.annotation.concurrent.NotThreadSafe;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
@@ -178,7 +179,7 @@ public class HiveTableOperations
                         .withStorage(storage -> storage.setLocation(metadata.location()))
                         .withStorage(storage -> storage.setStorageFormat(STORAGE_FORMAT))
                         .setParameter("EXTERNAL", "TRUE")
-                        .setParameter(TABLE_TYPE_PROP, ICEBERG_TABLE_TYPE_VALUE)
+                        .setParameter(TABLE_TYPE_PROP, ICEBERG_TABLE_TYPE_VALUE.toUpperCase(Locale.ENGLISH))
                         .setParameter(METADATA_LOCATION, newMetadataLocation);
                 String tableComment = metadata.properties().get(TABLE_COMMENT);
                 if (tableComment != null) {
